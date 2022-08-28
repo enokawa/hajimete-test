@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is a hajimete server.
+  version: 0.0.1
+  title: hajimete server
+
+tags:
+  - name: child
+    description: Your Children
+
+paths:
+  /child:
+    post:
+      tags:
+        - child
+      summary: Register a new child
+      description: Register new child
+      requestBody:
+        description: Register a new child
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterChildRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterChildResponse'
+        '400':
+          description: Bad Request
+components:
+  schemas:
+    Child:
+      type: object
+      properties:
+        id:
+          type: string
+          example: e7541865-997b-4bc0-909b-8fd433ed7d7e
+        name:
+          type: string
+          example: Bob
+        birthday:
+          type: string
+          format: date
+          example: '2022-08-28'
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-08-28T17:00:00Z'
+        updated_at:
+          type: string
+          example: '2022-08-28T17:00:00Z'
+    RegisterChildRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Bob
+        birthday:
+          type: string
+          format: date
+          example: '2022-08-28'
+      required:
+        - name
+        - birthday
+    RegisterChildResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: e7541865-997b-4bc0-909b-8fd433ed7d7e
+      required:
+        - id
+  requestBodies:
+    RegisterChildRequest:
+      description: Request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegisterChildRequest'

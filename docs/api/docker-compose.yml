@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  redoc:
+    image: redocly/redoc
+    ports:
+      - "8000:80"
+    volumes:
+      - ./openapi.yaml:/usr/share/nginx/html/openapi.yaml
+    environment:
+      - SPEC_URL=openapi.yaml
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./openapi.yaml:/openapi.yaml
+    environment:
+      - SWAGGER_FILE=/openapi.yaml
